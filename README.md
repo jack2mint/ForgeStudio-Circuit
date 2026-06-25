@@ -135,22 +135,6 @@ Included editor features:
 
 ---
 
-## Versioning
-
-Version remains:
-
-```text
-0.1.0-dev
-```
-
-until the user explicitly says:
-
-```text
-publish
-```
-
----
-
 ## Repository Name
 
 ```text
