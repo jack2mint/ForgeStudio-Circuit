@@ -1,0 +1,206 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ForgeStudio.Circuit.App.UI.Views.MainWindow"
+        Width="1440" Height="900"
+        MinWidth="1120" MinHeight="720"
+        Title="ForgeStudio Circuit">
+  <Grid RowDefinitions="64,*,260" ColumnDefinitions="360,*,330" Background="{DynamicResource FsBackgroundBrush}">
+    <Border Grid.Row="0" Grid.ColumnSpan="3" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="0,0,0,1" Padding="16,8">
+      <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto">
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="ForgeStudio Circuit" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource FsTextBrush}" />
+          <TextBlock Text="Standalone device-first microcontroller IDE by StaticTechGroup" FontSize="12" Foreground="{DynamicResource FsMutedTextBrush}" />
+        </StackPanel>
+        <Border Grid.Column="1" Margin="12,0,0,0" Padding="10,6" CornerRadius="10" Background="{DynamicResource FsPanelAltBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" VerticalAlignment="Center">
+          <StackPanel>
+            <TextBlock Text="STATE" FontSize="10" Foreground="{DynamicResource FsMutedTextBrush}" />
+            <TextBlock Text="{Binding ConnectionStateText}" Foreground="{DynamicResource FsAccentBrush}" FontWeight="SemiBold" />
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Margin="10,0,0,0" Padding="10,6" CornerRadius="10" Background="{DynamicResource FsPanelAltBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" VerticalAlignment="Center">
+          <StackPanel>
+            <TextBlock Text="MODE" FontSize="10" Foreground="{DynamicResource FsMutedTextBrush}" />
+            <TextBlock Text="{Binding ConnectionMode}" Foreground="{DynamicResource FsTextBrush}" FontWeight="SemiBold" />
+          </StackPanel>
+        </Border>
+        <ComboBox Grid.Column="3" Width="150" Margin="10,0,0,0" ItemsSource="{Binding Ports}" SelectedItem="{Binding SelectedPort}" VerticalAlignment="Center" />
+        <Button Grid.Column="4" Margin="10,0,0,0" Classes="accent" Command="{Binding RefreshPortsCommand}" Content="Refresh" VerticalAlignment="Center" />
+        <Button Grid.Column="5" Margin="10,0,0,0" Classes="accent" Command="{Binding ConnectCommand}" Content="Connect" VerticalAlignment="Center" />
+        <Button Grid.Column="6" Margin="10,0,0,0" Command="{Binding DisconnectCommand}" Content="Disconnect" VerticalAlignment="Center" />
+      </Grid>
+    </Border>
+
+    <Border Grid.Row="1" Grid.Column="0" Margin="12" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" CornerRadius="14" Padding="12">
+      <TabControl>
+        <TabItem Header="Device Files">
+          <Grid RowDefinitions="Auto,Auto,*" Margin="0,10,0,0">
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+              <TextBlock Text="Device Files" FontWeight="SemiBold" FontSize="18" />
+              <TextBlock Text="Primary workflow: open, edit, run, and save files on the board." FontSize="12" TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Content="Up" Command="{Binding GoDeviceParentCommand}" />
+                <TextBox Grid.Column="1" Margin="8,0,0,0" Text="{Binding DevicePath}" Watermark="/" />
+                <Button Grid.Column="2" Margin="8,0,0,0" Classes="accent" Command="{Binding LoadDeviceFilesCommand}" Content="Read Files" />
+              </Grid>
+              <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                <TextBlock Text="Filesystem" FontWeight="SemiBold" VerticalAlignment="Center" />
+                <Button Grid.Column="1" Classes="accent" Command="{Binding OpenDeviceFileCommand}" Content="Open Selected" />
+              </Grid>
+            </StackPanel>
+            <ListBox Grid.Row="2" ItemsSource="{Binding DeviceFiles}" SelectedItem="{Binding SelectedDeviceFile}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="Project Files">
+          <Grid RowDefinitions="Auto,*" Margin="0,10,0,0">
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+              <TextBlock Text="Local Workspace" FontWeight="SemiBold" FontSize="18" />
+              <TextBlock Text="Clean project folder only. Build outputs are filtered." FontSize="12" Foreground="{DynamicResource FsMutedTextBrush}" />
+              <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                <Button Command="{Binding LoadLocalFilesCommand}" Content="Refresh Local" />
+                <Button Grid.Column="1" Margin="8,0,0,0" Classes="accent" Command="{Binding OpenLocalFileCommand}" Content="Open" />
+              </Grid>
+            </StackPanel>
+            <ListBox Grid.Row="1" ItemsSource="{Binding LocalFiles}" SelectedItem="{Binding SelectedLocalFile}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="CircuitPython">
+          <StackPanel Margin="0,10,0,0">
+            <TextBlock Text="CircuitPython USB Drive Mode" FontWeight="SemiBold" FontSize="18" />
+            <TextBlock Text="Scans mounted CIRCUITPY drives. Uses drive files instead of MicroPython raw REPL." TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,4,0,10" />
+            <Button Content="Scan Drives" Command="{Binding RefreshCircuitPythonDrivesCommand}" />
+            <ComboBox Margin="0,8,0,0" ItemsSource="{Binding CircuitPythonDrives}" SelectedItem="{Binding SelectedCircuitPythonDrive}" />
+            <Button Margin="0,8,0,0" Classes="accent" Content="Mount CIRCUITPY" Command="{Binding MountCircuitPythonDriveCommand}" />
+          </StackPanel>
+        </TabItem>
+      </TabControl>
+    </Border>
+
+    <Border Grid.Row="1" Grid.Column="1" Margin="0,12" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" CornerRadius="14" Padding="0">
+      <Grid RowDefinitions="48,42,*,64">
+        <Border Grid.Row="0" Background="{DynamicResource FsPanelAltBrush}" CornerRadius="14,14,0,0" Padding="12,8">
+          <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto,Auto">
+            <Border Background="{DynamicResource FsAccentSoftBrush}" BorderBrush="{DynamicResource FsAccentBrush}" BorderThickness="1" CornerRadius="8" Padding="10,5">
+              <TextBlock Text="{Binding CurrentLanguage}" FontWeight="SemiBold" />
+            </Border>
+            <TextBlock Grid.Column="1" Text="{Binding EditorState}" Foreground="{DynamicResource FsMutedTextBrush}" VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Grid.Column="2" Text="{Binding EditorCaretStatus}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{DynamicResource FsMutedTextBrush}" Margin="10,0,0,0" />
+            <TextBox Grid.Column="3" Width="230" Text="{Binding DeviceTargetPath}" Watermark="device path: main.py" Margin="10,0,0,0" />
+            <Button Grid.Column="4" Margin="10,0,0,0" Command="{Binding SaveLocalFileCommand}" Content="Save Local" />
+            <Button Grid.Column="5" Margin="10,0,0,0" Classes="accent" Command="{Binding SaveEditorToDeviceCommand}" Content="Save to Device" />
+          </Grid>
+        </Border>
+        <Border Grid.Row="1" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="0,0,0,1" Padding="12,6">
+          <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto,Auto">
+            <Button Content="New" Command="{Binding NewEditorFileCommand}" />
+            <Button Grid.Column="1" Margin="8,0,0,0" Content="Format" Command="{Binding FormatIndentCommand}" />
+            <Button Grid.Column="2" Margin="8,0,0,0" Content="Comment" Command="{Binding ToggleCommentCommand}" />
+            <Button Grid.Column="3" Margin="8,0,0,0" Content="Validate" Command="{Binding ValidateEditorCommand}" />
+            <TextBox Grid.Column="4" Margin="12,0,0,0" Text="{Binding FindText}" Watermark="Find text or run-selection text" />
+            <Button Grid.Column="5" Margin="8,0,0,0" Content="Find" Command="{Binding FindNextCommand}" />
+            <ComboBox Grid.Column="6" Width="150" Margin="8,0,0,0" ItemsSource="{Binding Snippets}" SelectedItem="{Binding SelectedSnippet}" />
+            <Button Grid.Column="7" Margin="8,0,0,0" Classes="accent" Content="Insert" Command="{Binding InsertSnippetCommand}" />
+          </Grid>
+        </Border>
+        <Border Grid.Row="2" Background="#0D1518" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="0">
+          <Grid ColumnDefinitions="64,*">
+            <Border Grid.Column="0" Background="#091013" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="0,0,1,0">
+              <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding EditorLineNumbers}" Margin="0,8,0,8">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding}"
+                                 FontFamily="Consolas"
+                                 FontSize="14"
+                                 Foreground="{DynamicResource FsMutedTextBrush}"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,0,10,0" />
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+            </Border>
+            <TextBox Grid.Column="1"
+                     Text="{Binding EditorText, Mode=TwoWay}"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     TextWrapping="NoWrap"
+                     FontFamily="Consolas"
+                     FontSize="14"
+                     Background="#0D1518"
+                     Foreground="#E7F5EE"
+                     BorderThickness="0"
+                     Padding="12,8" />
+          </Grid>
+        </Border>
+        <Border Grid.Row="3" Background="{DynamicResource FsPanelAltBrush}" CornerRadius="0,0,14,14" Padding="12,8">
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <TextBlock Text="{Binding EditorAssistText}" Foreground="{DynamicResource FsMutedTextBrush}" TextWrapping="Wrap" />
+            <Button Grid.Column="1" Margin="10,0,0,0" Command="{Binding RunSelectionCommand}" Content="Run Selection" />
+            <Button Grid.Column="2" Margin="10,0,0,0" Classes="accent" Command="{Binding RunEditorCommand}" Content="Run File" />
+          </Grid>
+        </Border>
+      </Grid>
+    </Border>
+
+    <Border Grid.Row="1" Grid.Column="2" Margin="12" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" CornerRadius="14" Padding="12">
+      <TabControl>
+        <TabItem Header="Status">
+          <StackPanel Margin="0,10,0,0">
+            <TextBlock Text="Device Status" FontWeight="SemiBold" FontSize="18" />
+            <TextBlock Text="{Binding DeviceStatus}" Foreground="{DynamicResource FsAccentBrush}" FontWeight="SemiBold" Margin="0,6,0,0" />
+            <TextBlock Text="{Binding ConnectionHint}" TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,6,0,10" />
+            <TextBlock Text="Board Profile" FontWeight="SemiBold" FontSize="16" />
+            <ComboBox ItemsSource="{Binding BoardNames}" SelectedItem="{Binding SelectedBoardName}" Margin="0,6,0,0" />
+            <TextBlock Text="Workflow" FontWeight="SemiBold" FontSize="16" Margin="0,14,0,0" />
+            <TextBlock Text="1. Connect board&#10;2. Read device files&#10;3. Open a file&#10;4. Edit/save/run&#10;5. Check Problems if something fails" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,6,0,0" />
+            <Button Content="Copy Diagnostics" Command="{Binding CopyDiagnosticsCommand}" Margin="0,14,0,0" />
+          </StackPanel>
+        </TabItem>
+        <TabItem Header="Help">
+          <ScrollViewer Margin="0,10,0,0">
+            <StackPanel>
+              <TextBlock Text="Full IDE Editor" FontWeight="SemiBold" FontSize="18" />
+              <TextBlock Text="Line numbers, syntax highlighting, filetype detection, snippets, find, comment toggle, indentation cleanup, validation, local save, device save, run file, and run-selection support." TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,6,0,12" />
+              <TextBlock Text="MicroPython Mode" FontWeight="SemiBold" FontSize="16" />
+              <TextBlock Text="File operations use raw REPL. If raw REPL fails, the app remains connected in Serial Monitor mode instead of crashing." TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,6,0,12" />
+              <TextBlock Text="CircuitPython Mode" FontWeight="SemiBold" FontSize="16" />
+              <TextBlock Text="Use the CircuitPython tab to mount CIRCUITPY as a drive-backed filesystem." TextWrapping="Wrap" Foreground="{DynamicResource FsMutedTextBrush}" Margin="0,6,0,0" />
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+      </TabControl>
+    </Border>
+
+    <Border Grid.Row="2" Grid.ColumnSpan="3" Margin="12,0,12,12" Background="{DynamicResource FsPanelBrush}" BorderBrush="{DynamicResource FsBorderBrush}" BorderThickness="1" CornerRadius="14" Padding="12">
+      <TabControl>
+        <TabItem Header="REPL">
+          <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,10,0,0">
+            <TextBlock Text="REPL / Serial Console" FontWeight="SemiBold" FontSize="16" />
+            <Button Grid.Column="1" Margin="8,0,0,0" Command="{Binding StopProgramCommand}" Content="Stop" />
+            <Button Grid.Column="2" Margin="8,0,0,0" Command="{Binding SoftRebootCommand}" Content="Soft Reboot" />
+            <Button Grid.Column="3" Margin="8,0,0,0" Command="{Binding ClearConsoleCommand}" Content="Clear" />
+            <TextBox Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding ConsoleText}" AcceptsReturn="True" IsReadOnly="False" FontFamily="Consolas" TextWrapping="Wrap" Margin="0,8,0,8" />
+            <Grid Grid.Row="2" Grid.ColumnSpan="4" ColumnDefinitions="*,Auto">
+              <TextBox Text="{Binding ReplInput}" Watermark="MicroPython command" FontFamily="Consolas" />
+              <Button Grid.Column="1" Margin="8,0,0,0" Classes="accent" Command="{Binding SendReplCommand}" Content="Send REPL" />
+            </Grid>
+          </Grid>
+        </TabItem>
+        <TabItem Header="Problems">
+          <Grid RowDefinitions="Auto,*" Margin="0,10,0,0">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="Problems / Diagnostics" FontWeight="SemiBold" FontSize="16" />
+              <Button Grid.Column="1" Content="Clear" Command="{Binding ClearProblemsCommand}" />
+            </Grid>
+            <ListBox Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding Problems}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="Logs">
+          <TextBox Text="{Binding ConsoleText}" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" TextWrapping="Wrap" Margin="0,10,0,0" />
+        </TabItem>
+      </TabControl>
+    </Border>
+  </Grid>
+</Window>

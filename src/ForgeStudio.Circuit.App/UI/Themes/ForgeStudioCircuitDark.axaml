@@ -1,0 +1,83 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20" Background="{DynamicResource FsBackgroundBrush}">
+      <TextBlock Text="ForgeStudio Circuit Theme" Foreground="{DynamicResource FsTextBrush}" />
+    </Border>
+  </Design.PreviewWith>
+
+  <Styles.Resources>
+    <SolidColorBrush x:Key="FsBackgroundBrush" Color="#080B0D" />
+    <SolidColorBrush x:Key="FsPanelBrush" Color="#11171A" />
+    <SolidColorBrush x:Key="FsPanelAltBrush" Color="#151D21" />
+    <SolidColorBrush x:Key="FsBorderBrush" Color="#263238" />
+    <SolidColorBrush x:Key="FsAccentBrush" Color="#39FF88" />
+    <SolidColorBrush x:Key="FsAccentSoftBrush" Color="#223A2E" />
+    <SolidColorBrush x:Key="FsTextBrush" Color="#E7F5EE" />
+    <SolidColorBrush x:Key="FsMutedTextBrush" Color="#8FA99C" />
+    <SolidColorBrush x:Key="FsDangerBrush" Color="#FF4D5E" />
+    <SolidColorBrush x:Key="FsWarningBrush" Color="#F5C542" />
+  </Styles.Resources>
+
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{DynamicResource FsBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial" />
+  </Style>
+
+  <Style Selector="TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+  </Style>
+
+  <Style Selector="TextBox">
+    <Setter Property="Background" Value="{DynamicResource FsPanelAltBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource FsBorderBrush}" />
+    <Setter Property="CaretBrush" Value="{DynamicResource FsAccentBrush}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource FsAccentSoftBrush}" />
+  </Style>
+
+  <Style Selector="ComboBox">
+    <Setter Property="Background" Value="{DynamicResource FsPanelAltBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource FsBorderBrush}" />
+  </Style>
+
+  <Style Selector="ComboBoxItem">
+    <Setter Property="Background" Value="{DynamicResource FsPanelAltBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+  </Style>
+
+  <Style Selector="Button">
+    <Setter Property="Background" Value="{DynamicResource FsPanelAltBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource FsBorderBrush}" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Padding" Value="12,7" />
+  </Style>
+
+  <Style Selector="Button.accent">
+    <Setter Property="Background" Value="{DynamicResource FsAccentSoftBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource FsAccentBrush}" />
+  </Style>
+
+  <Style Selector="ListBox">
+    <Setter Property="Background" Value="{DynamicResource FsPanelBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource FsBorderBrush}" />
+  </Style>
+
+  <Style Selector="ListBoxItem">
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="Padding" Value="10,8" />
+  </Style>
+
+  <Style Selector="TabControl">
+    <Setter Property="Background" Value="{DynamicResource FsPanelBrush}" />
+  </Style>
+
+  <Style Selector="TabItem">
+    <Setter Property="Foreground" Value="{DynamicResource FsTextBrush}" />
+    <Setter Property="Padding" Value="10,7" />
+  </Style>
+</Styles>

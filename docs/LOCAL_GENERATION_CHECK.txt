@@ -1,0 +1,3 @@
+ForgeStudio Circuit validation passed.
+Checked: standalone project structure, no Hub SDK dependency, dark UI resources, required installer/build/package files, security validator files, and no control characters in C# source.
+Note: dotnet SDK and Inno Setup were not available in this environment, so compile/install checks must run locally.

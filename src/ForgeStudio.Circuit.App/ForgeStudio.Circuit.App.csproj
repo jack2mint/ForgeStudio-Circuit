@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>ForgeStudio.Circuit.App</AssemblyName>
+    <RootNamespace>ForgeStudio.Circuit.App</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForgeStudio.Circuit.Core\ForgeStudio.Circuit.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\config\appsettings.default.json" Link="config\appsettings.default.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\board-profiles\boards.json" Link="board-profiles\boards.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

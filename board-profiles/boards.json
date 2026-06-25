@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "boards": [
+    {
+      "id": "raspberry-pi-pico",
+      "displayName": "Raspberry Pi Pico",
+      "family": "RP2040",
+      "runtime": [
+        "MicroPython",
+        "CircuitPython"
+      ],
+      "connection": [
+        "serial",
+        "uf2"
+      ],
+      "defaultBaud": 115200,
+      "destructiveToolsEnabled": false
+    },
+    {
+      "id": "raspberry-pi-pico-w",
+      "displayName": "Raspberry Pi Pico W",
+      "family": "RP2040",
+      "runtime": [
+        "MicroPython",
+        "CircuitPython"
+      ],
+      "connection": [
+        "serial",
+        "uf2"
+      ],
+      "defaultBaud": 115200,
+      "destructiveToolsEnabled": false
+    },
+    {
+      "id": "esp32-wroom",
+      "displayName": "ESP32-WROOM",
+      "family": "ESP32",
+      "runtime": [
+        "MicroPython"
+      ],
+      "connection": [
+        "serial"
+      ],
+      "defaultBaud": 115200,
+      "destructiveToolsEnabled": false
+    },
+    {
+      "id": "esp8266",
+      "displayName": "ESP8266",
+      "family": "ESP8266",
+      "runtime": [
+        "MicroPython"
+      ],
+      "connection": [
+        "serial"
+      ],
+      "defaultBaud": 115200,
+      "destructiveToolsEnabled": false
+    }
+  ]
+}
