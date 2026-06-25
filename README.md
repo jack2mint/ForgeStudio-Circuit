@@ -95,14 +95,14 @@ When you click **Connect**, ForgeStudio Circuit attempts to enter MicroPython ra
 os.ilistdir
 ```
 
-Use:
+Use the following controls for device file operations:
 
-| Action             | Behavior                                                     |
-| ------------------ | ------------------------------------------------------------ |
-| **Read Files**     | Refreshes the current device path                            |
-| **Open**           | Reads a selected device file into the editor                 |
-| **Save to Device** | Writes editor content back to the selected/typed device path |
-| **Run**            | Executes the editor buffer through raw REPL                  |
+| Action             | Behavior                                                        |
+| ------------------ | --------------------------------------------------------------- |
+| **Read Files**     | Refreshes the current device path                               |
+| **Open**           | Reads a selected device file into the editor                    |
+| **Save to Device** | Writes editor content back to the selected or typed device path |
+| **Run**            | Executes the editor buffer through raw REPL                     |
 
 For best results, stop any currently running program on the board before connecting.
 
